@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">NonoCopter</string>
-    <string name="action_connect">Connexion au NonoCopter</string>
-    <string name="action_video">Vidéo</string>
-    <string name="action_photo">Photo</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name"         >NonoCopter</string>
+    <string name="connected"        >Connecté</string>
+    <string name="notConnected"     >Non connecté</string>
+    <string name="loadT_connecting" >Connexion</string>
+    <string name="load_connecting"  >Connexion au NonoCopter...</string>
 </resources>

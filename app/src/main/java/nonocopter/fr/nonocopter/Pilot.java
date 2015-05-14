@@ -2,8 +2,10 @@ package nonocopter.fr.nonocopter;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -12,15 +14,20 @@ import android.widget.Toast;
 
 public class Pilot extends Activity {
 
+    ImageButton btnEmergency;
+    ImageButton btnConnect;
+    ImageButton btnVideo;
+    ImageButton btnPhoto;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pilot);
-        ImageButton btnEmergency = (ImageButton) findViewById(R.id.btnEmergency);
-        ImageButton btnConnect   = (ImageButton) findViewById(R.id.btnConnect);
-        ImageButton btnVideo     = (ImageButton) findViewById(R.id.btnVideo);
-        ImageButton btnPhoto     = (ImageButton) findViewById(R.id.btnPhoto);
-        setButtonColor(btnEmergency, Color.RED);
+        btnEmergency = (ImageButton) findViewById(R.id.btnEmergency);
+        btnConnect   = (ImageButton) findViewById(R.id.btnConnect);
+        btnVideo     = (ImageButton) findViewById(R.id.btnVideo);
+        btnPhoto     = (ImageButton) findViewById(R.id.btnPhoto);
+        setButtonColor( btnEmergency, Color.RED);
         setButtonColor( btnConnect,   Color.RED);
 
         btnConnect.setOnClickListener( new View.OnClickListener() {
@@ -30,27 +37,29 @@ public class Pilot extends Activity {
         });
     }
 
-    public void startConnexion() { Toast.makeText( this, "Coucou", Toast.LENGTH_LONG).show();
-        /*final ProgressDialog progress = ProgressDialog.show( Connexion.this, "Connexion", "Connexion au NonoCopter...", true, false);
+    public void startConnexion() {
+        final Context c = this;
+        final ProgressDialog progress = ProgressDialog.show( this, getString( R.string.loadT_connecting), getString( R.string.load_connecting), true, false);
 
         new AsyncTask<Void, Void, Boolean>() {
 
             @Override
             protected Boolean doInBackground(Void... params) {
-                return ConnexionManager.connectToCopter( getApplicationContext());
+                return ConnexionManager.connectToCopter( c);
             }
 
             @Override
             protected void onPostExecute( Boolean connected) {
                 super.onPostExecute(connected);
                 progress.dismiss();
-                String text = connected ? "Connecté" : "Non connecté";
-                Toast.makeText(Connexion.this, text, Toast.LENGTH_LONG).show();
+                setButtonColor( btnConnect, connected ? Color.GREEN : Color.RED);
+                String text = connected ? getString(R.string.connected) : getString(R.string.notConnected);
+                Toast.makeText( Pilot.this, text, Toast.LENGTH_LONG).show();
             }
-        }.execute(null, null, null);*/
+        }.execute(null, null, null);
     }
 
-    public void setButtonColor( ImageButton btn, int color) {
+    private void setButtonColor( ImageButton btn, int color) {
         btn.getDrawable().setColorFilter( color, PorterDuff.Mode.SRC_IN);
     }
 }
