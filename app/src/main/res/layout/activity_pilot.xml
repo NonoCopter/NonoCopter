@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:padding="@dimen/activity_horizontal_margin"
+    android:layout_height="match_parent" android:padding="@dimen/activity_margin"
     tools:context=".Pilot">
 
     <LinearLayout
@@ -16,10 +16,10 @@
             android:layout_height="wrap_content"
             android:weightSum="1">
 
-            <ImageView
+            <ImageButton
                 android:layout_width="@dimen/topbar_btn_size"
                 android:layout_height="@dimen/topbar_btn_size"
-                android:id="@+id/btn_emergency"
+                android:id="@+id/btnEmergency"
                 android:src="@drawable/ic_action_warning" />
 
             <LinearLayout
@@ -28,22 +28,22 @@
                 android:layout_height="match_parent"
                 android:gravity="right">
 
-                <ImageView
+                <ImageButton
                     android:layout_width="@dimen/topbar_btn_size"
                     android:layout_height="@dimen/topbar_btn_size"
-                    android:id="@+id/btn_connect"
+                    android:id="@+id/btnConnect"
                     android:src="@drawable/ic_action_network_wifi" />
 
-                <ImageView
+                <ImageButton
                     android:layout_width="@dimen/topbar_btn_size"
                     android:layout_height="@dimen/topbar_btn_size"
-                    android:id="@+id/btn_video"
+                    android:id="@+id/btnVideo"
                     android:src="@drawable/ic_action_video"/>
 
-                <ImageView
+                <ImageButton
                     android:layout_width="@dimen/topbar_btn_size"
                     android:layout_height="@dimen/topbar_btn_size"
-                    android:id="@+id/btn_photo"
+                    android:id="@+id/btnPhoto"
                     android:src="@drawable/ic_action_camera"/>
             </LinearLayout>
 
