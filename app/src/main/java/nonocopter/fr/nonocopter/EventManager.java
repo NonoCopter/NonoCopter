@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
-import android.widget.Toast;
 
 public class EventManager extends BroadcastReceiver {
     public EventManager() {
@@ -13,25 +12,15 @@ public class EventManager extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context c, Intent intent) {
-        String action = intent.getAction();
-
-        switch ( action ){
+        switch ( intent.getAction() ){
             case "android.net.conn.CONNECTIVITY_CHANGE" :
-                WifiManager manager = (WifiManager)c.getSystemService(Context.WIFI_SERVICE);
-                NetworkInfo networkInfo = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
+                NetworkInfo networkInfo = intent.getParcelableExtra( WifiManager.EXTRA_NETWORK_INFO);
                 NetworkInfo.State state = networkInfo.getState();
-
-                if( state == NetworkInfo.State.CONNECTED){
-                    System.out.println( "Connected");
+                if ( state == NetworkInfo.State.CONNECTED && ConnexionManager.isOnGoodWifi( c) ) {
+                    c.sendBroadcast(new Intent("EVENT_CONNECTED"));
                 }
-                if ( state == NetworkInfo.State.CONNECTING){
-                    System.out.println( "Connecting");
-                }
-                if ( state == NetworkInfo.State.DISCONNECTING){
-                    System.out.println( "Disconnecting");
-                }
-                if ( state == NetworkInfo.State.DISCONNECTED){
-                    System.out.println( "Disconnected");
+                if ( state == NetworkInfo.State.DISCONNECTED ){
+                    c.sendBroadcast(new Intent( "EVENT_DISCONNECTED"));
                 }
                 break;
         }

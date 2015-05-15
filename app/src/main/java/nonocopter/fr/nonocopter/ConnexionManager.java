@@ -1,6 +1,7 @@
 package nonocopter.fr.nonocopter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiConfiguration;
@@ -11,11 +12,8 @@ import java.util.List;
 
 public class ConnexionManager {
 
-    final private static String COPTER_WIFI_NAME = "IT NAPOLEON";
-    final private static String COPTER_WIFI_PASS = "jollyjungle797";
-
-    //final private static String COPTER_WIFI_NAME = "NonoCopter";
-    //final private static String COPTER_WIFI_PASS = "0123456789A";
+    final private static String COPTER_WIFI_NAME = "NonoCopter";
+    final private static String COPTER_WIFI_PASS = "0123456789A";
 
     public static Boolean connectToCopter( final Context c){
         _lockWifi( c);
@@ -24,8 +22,7 @@ public class ConnexionManager {
     }
 
     private static void _lockWifi( Context c){
-        WifiManager          wm   = _getWifiManager(c);
-        WifiManager.WifiLock lock = wm.createWifiLock( WifiManager.WIFI_MODE_FULL_HIGH_PERF, "NonoCopterWifiLock");
+        WifiManager.WifiLock lock = _getWifiManager(c).createWifiLock(WifiManager.WIFI_MODE_FULL_HIGH_PERF, "NonoCopterWifiLock");
         lock.acquire();
     }
 
@@ -44,10 +41,9 @@ public class ConnexionManager {
     }
 
     private static Boolean _connectToWifi( Context c, Integer wifiId, Integer timeout){
-        Long     start = new Date().getTime();
-        WifiManager wm = _getWifiManager(c);
-        wm.enableNetwork( wifiId, true);
-        while( !_isOnGoodWifi( c) || !_isWifiConnected( c)  ){
+        Long start = new Date().getTime();
+        _getWifiManager(c).enableNetwork( wifiId, true);
+        while( !isOnGoodWifi( c) || !_isWifiConnected( c)  ){
             if ( ( new Date().getTime() - start) > timeout*1000 ) return false;
         }
         return true;
@@ -64,24 +60,21 @@ public class ConnexionManager {
         return netInfoWifi.isConnected();
     }
 
-    private static boolean _isOnGoodWifi( Context c){
-        WifiInfo info = getWifiInfo( c);
-        return info.getSSID().equals( "\"" + COPTER_WIFI_NAME + "\"");
+    public static boolean isOnGoodWifi( Context c){
+        return _getWifiInfo(c).getSSID().equals( "\"" + COPTER_WIFI_NAME + "\"");
     }
 
     private static WifiManager _getWifiManager( Context c){
         return ( WifiManager) c.getSystemService( Context.WIFI_SERVICE);
     }
 
-    private static WifiInfo getWifiInfo( Context c){
-        WifiManager wm = _getWifiManager(c);
-        return wm.getConnectionInfo();
+    private static WifiInfo _getWifiInfo( Context c){
+        return _getWifiManager(c).getConnectionInfo();
     }
 
     private static Boolean _turnOnWifi( Context c, int timeout){
-        Long      start = new Date().getTime();
-        WifiManager wm  = _getWifiManager( c);
-        wm.setWifiEnabled( true);
+        Long start = new Date().getTime();
+        _getWifiManager( c).setWifiEnabled(true);
         while( !_isWifiEnabled( c) ){
             if ( ( new Date().getTime() - start) > timeout*1000 ) return false;
         }

@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name"         >NonoCopter</string>
     <string name="connected"        >Connecté</string>
-    <string name="notConnected"     >Non connecté</string>
+    <string name="notConnected"     >Déconnecté</string>
     <string name="loadT_connecting" >Connexion</string>
     <string name="load_connecting"  >Connexion au NonoCopter...</string>
+    <string name="emergency"        >Urgence !</string>
 </resources>
