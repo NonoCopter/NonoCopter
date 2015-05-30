@@ -43,10 +43,14 @@ public class ConnexionManager {
     private static Boolean _connectToWifi( Context c, Integer wifiId, Integer timeout){
         Long start = new Date().getTime();
         _getWifiManager(c).enableNetwork( wifiId, true);
-        while( !isOnGoodWifi( c) || !_isWifiConnected( c)  ){
+        while( !isConnectedToCopter( c) ){
             if ( ( new Date().getTime() - start) > timeout*1000 ) return false;
         }
         return true;
+    }
+
+    public static Boolean isConnectedToCopter( Context c){
+        return isOnGoodWifi( c) && _isWifiConnected( c);
     }
 
     private static Boolean _isWifiEnabled( Context c){

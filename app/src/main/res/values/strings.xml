@@ -3,6 +3,9 @@
     <string name="connected"        >Connecté</string>
     <string name="notConnected"     >Déconnecté</string>
     <string name="loadT_connecting" >Connexion</string>
-    <string name="load_connecting"  >Connexion au NonoCopter...</string>
+    <string name="load_connecting"  >Connexion au NonoCopter</string>
     <string name="emergency"        >Urgence !</string>
+    <string name="take_photo"       >Photo</string>
+    <string name="stream_loading"   >Chargement du stream</string>
+    <string name="stream_error"     >Erreur de stream</string>
 </resources>

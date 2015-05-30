@@ -17,10 +17,10 @@ public class EventManager extends BroadcastReceiver {
                 NetworkInfo networkInfo = intent.getParcelableExtra( WifiManager.EXTRA_NETWORK_INFO);
                 NetworkInfo.State state = networkInfo.getState();
                 if ( state == NetworkInfo.State.CONNECTED && ConnexionManager.isOnGoodWifi( c) ) {
-                    c.sendBroadcast(new Intent("EVENT_CONNECTED"));
+                    c.sendBroadcast( new Intent("EVENT_CONNECTED"));
                 }
                 if ( state == NetworkInfo.State.DISCONNECTED ){
-                    c.sendBroadcast(new Intent( "EVENT_DISCONNECTED"));
+                    c.sendBroadcast( new Intent( "EVENT_DISCONNECTED"));
                 }
                 break;
         }
