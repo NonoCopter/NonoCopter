@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.hardware.SensorEventListener;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -15,10 +16,13 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
 public class Pilot extends Activity {
+
+    Navigator nav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,21 +38,21 @@ public class Pilot extends Activity {
         ImageButton btnMoveDown  = ( ImageButton) findViewById( R.id.btnMoveDown);
         ImageButton btnMoveLeft  = ( ImageButton) findViewById( R.id.btnMoveLeft);
         ImageButton btnMoveRight = ( ImageButton) findViewById( R.id.btnMoveRight);
-        VideoView videoView      = (VideoView)    findViewById(R.id.videoView);
-        setButtonColor(R.id.btnEmergency, Color.RED);
+        ImageButton btnNavigate  = ( ImageButton) findViewById( R.id.btnNavigate);
+        VideoView videoView      = ( VideoView)   findViewById( R.id.videoView);
+        setButtonColor( R.id.btnEmergency, Color.RED);
         setButtonColor(R.id.btnConnect, Color.RED);
         btnEmergency.setOnClickListener(onClickListener);
-        btnConnect.setOnClickListener(onClickListener);
-        btnVideo.setOnClickListener(onClickListener);
-        btnPhoto.setOnClickListener(onClickListener);
-        btnMoveUp.setOnTouchListener(onTouchListener);
-        btnMoveDown.setOnTouchListener(onTouchListener);
-        btnMoveLeft.setOnTouchListener(onTouchListener);
+        btnConnect  .setOnClickListener(onClickListener);
+        btnVideo    .setOnClickListener(onClickListener);
+        btnPhoto    .setOnClickListener(onClickListener);
+        btnMoveUp   .setOnTouchListener(onTouchListener);
+        btnMoveDown .setOnTouchListener(onTouchListener);
+        btnMoveLeft .setOnTouchListener(onTouchListener);
         btnMoveRight.setOnTouchListener(onTouchListener);
-
-        videoView.setOnTouchListener(onTouchListener);
-
-        if ( ConnexionManager.isConnectedToCopter( this)) showConnected();
+        btnNavigate .setOnTouchListener(onTouchListener);
+        videoView   .setOnTouchListener(onTouchListener);
+        if ( new ConnexionManager().isConnectedToCopter(this)) showConnected();
     }
 
     private View.OnTouchListener onTouchListener = new View.OnTouchListener() {
@@ -60,16 +64,19 @@ public class Pilot extends Activity {
                     PlayVideo();
                     break;
                 case R.id.btnMoveUp:
-                    moveDrone("up", e);
+                    if ( e == MotionEvent.ACTION_DOWN || e == MotionEvent.ACTION_MOVE ) moveDrone( "up");
                     break;
                 case R.id.btnMoveDown:
-                    moveDrone( "down", e);
+                    if ( e == MotionEvent.ACTION_DOWN || e == MotionEvent.ACTION_MOVE ) moveDrone( "down");
                     break;
                 case R.id.btnMoveLeft:
-                    moveDrone( "left", e);
+                    if ( e == MotionEvent.ACTION_DOWN || e == MotionEvent.ACTION_MOVE ) moveDrone( "left");
                     break;
                 case R.id.btnMoveRight:
-                    moveDrone( "right", e);
+                    if ( e == MotionEvent.ACTION_DOWN || e == MotionEvent.ACTION_MOVE ) moveDrone( "right");
+                    break;
+                case R.id.btnNavigate:
+                    navigate( e);
                     break;
             }
             return true;
@@ -93,8 +100,13 @@ public class Pilot extends Activity {
         }
     };
 
-    public void moveDrone( String action, int event){
-        if ( event == MotionEvent.ACTION_DOWN || event == MotionEvent.ACTION_MOVE ) moveDrone( action.toLowerCase());
+    public void navigate( int e){
+        if ( nav == null ) nav = new Navigator( this);
+        TextView txt = (TextView) findViewById( R.id.textView);
+
+        if ( e == MotionEvent.ACTION_DOWN ) nav.start();
+        if ( e == MotionEvent.ACTION_MOVE ) txt.setText( nav.navigate());
+        if ( e == MotionEvent.ACTION_UP || e == MotionEvent.ACTION_CANCEL ) nav.stop();
     }
 
     public void moveDrone( String action){ // TODO
@@ -146,7 +158,7 @@ public class Pilot extends Activity {
         new AsyncTask<Void, Void, Boolean>() {
             @Override
             protected Boolean doInBackground(Void... params) {
-                return ConnexionManager.connectToCopter( c);
+                return new ConnexionManager().connectToCopter(c);
             }
             @Override
             protected void onPostExecute( Boolean connected) {

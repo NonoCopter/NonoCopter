@@ -28,6 +28,12 @@
                 android:layout_height="match_parent"
                 android:gravity="right">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Text"
+                    android:id="@+id/textView" />
+
                 <ImageButton
                     android:layout_width="@dimen/topbar_btn_size"
                     android:layout_height="@dimen/topbar_btn_size"
