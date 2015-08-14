@@ -7,5 +7,13 @@
     <string name="emergency"        >Urgence !</string>
     <string name="take_photo"       >Photo</string>
     <string name="stream_loading"   >Chargement du stream</string>
-    <string name="stream_error"     >Erreur de stream</string>
+    <string name="startCalibrage"   >Lancer le calibrage des moteurs ? \nBrancher la batterie avant de continuer</string>
+    <string name="calibrageT_load"  >Calibrage</string>
+    <string name="calibrage_load"   >Calibrage des moteurs en cours</string>
+    <string name="calibrage_ok"     >Calibrage terminé</string>
+    <string name="calibrage_ko"     >Erreur pendant le calibrage</string>
+    <string name="calibrage_again"  >Calibrage déjà réalisé</string>
+    <string name="yes"              >Oui</string>
+    <string name="no"               >Non</string>
+    <string name="ok"               >OK</string>
 </resources>
