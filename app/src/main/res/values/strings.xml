@@ -1,19 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name"         >NonoCopter</string>
-    <string name="connected"        >Connecté</string>
-    <string name="notConnected"     >Déconnecté</string>
-    <string name="loadT_connecting" >Connexion</string>
-    <string name="load_connecting"  >Connexion au NonoCopter</string>
-    <string name="emergency"        >Urgence !</string>
-    <string name="take_photo"       >Photo</string>
-    <string name="stream_loading"   >Chargement du stream</string>
-    <string name="startCalibrage"   >Lancer le calibrage des moteurs ? \nBrancher la batterie avant de continuer</string>
-    <string name="calibrageT_load"  >Calibrage</string>
-    <string name="calibrage_load"   >Calibrage des moteurs en cours</string>
-    <string name="calibrage_ok"     >Calibrage terminé</string>
-    <string name="calibrage_ko"     >Erreur pendant le calibrage</string>
-    <string name="calibrage_again"  >Calibrage déjà réalisé</string>
-    <string name="yes"              >Oui</string>
-    <string name="no"               >Non</string>
-    <string name="ok"               >OK</string>
+    <string name="app_name"        >NonoCopter</string>
+    <string name="connected"       >Connecté</string>
+    <string name="notConnected"    >Déconnecté</string>
+    <string name="loadT_connecting">Connexion</string>
+    <string name="load_connecting" >Connexion au NonoCopter</string>
+    <string name="emergency"       >Urgence !</string>
+    <string name="take_photo"      >Photo</string>
+    <string name="stream_loading"  >Chargement du stream</string>
+    <string name="startCalibrage"  >Calibrer les moteurs ? \nBrancher la batterie avant de continuer</string>
+    <string name="calibrageT_load" >Calibrage</string>
+    <string name="calibrage_load"  >Calibrage des moteurs en cours</string>
+    <string name="calibrage_ok"    >Calibrage terminé</string>
+    <string name="calibrage_ko"    >Erreur pendant le calibrage</string>
+    <string name="calibrage_again" >Calibrage déjà réalisé</string>
+    <string name="yes"             >Oui</string>
+    <string name="no"              >Non</string>
+    <string name="ok"              >OK</string>
+    <string name="drawer_calib"    >Calibrer les moteurs</string>
+    <string name="drawer_restart"  >Redémarrer NonoCopter</string>
+    <string name="drawer_stop"     >Arrêter NonoCopter</string>
 </resources>

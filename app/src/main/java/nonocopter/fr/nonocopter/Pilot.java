@@ -8,14 +8,24 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.net.MalformedURLException;
@@ -34,6 +44,24 @@ public class Pilot extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pilot);
+
+        String[] items      = getResources().getStringArray(R.array.nav_drawer_items);
+
+        ListView drawerList = (ListView) findViewById(R.id.left_drawer);
+        drawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, items));
+        drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawers();
+                switch ( position){
+                    case 0 : startCalibration();  break;
+                    case 1 : stopOrRestartNonoCopter( false); break;
+                    case 2 : stopOrRestartNonoCopter(true);    break;
+                }
+            }
+        });
+
         registerReceiver(onBroadcastReceived, new IntentFilter("EVENT_DISCONNECTED"));
         registerReceiver(onBroadcastReceived, new IntentFilter("EVENT_CONNECTED"));
         ImageButton btnEmergency = (ImageButton) findViewById(R.id.btnEmergency);
@@ -46,6 +74,7 @@ public class Pilot extends Activity {
         ImageButton btnMoveRight = (ImageButton) findViewById(R.id.btnMoveRight);
         ImageButton btnNavigate  = (ImageButton) findViewById(R.id.btnNavigate);
         ImageButton btnCalib     = (ImageButton) findViewById(R.id.btnCalib);
+        ImageButton btnDrawer    = (ImageButton) findViewById(R.id.btnDrawer);
         setButtonColor(R.id.btnEmergency, Color.RED);
         setButtonColor(R.id.btnConnect,   Color.RED);
         btnEmergency.setOnClickListener(onClickListener);
@@ -57,8 +86,8 @@ public class Pilot extends Activity {
         btnMoveLeft.setOnTouchListener(onTouchListener);
         btnMoveRight.setOnTouchListener(onTouchListener);
         btnNavigate.setOnTouchListener(onTouchListener);
-        btnCalib.setOnClickListener(onClickListener);
-        if (new ConnexionManager().isConnectedToCopter(this)) showConnected();
+        btnDrawer.setOnClickListener(onClickListener);
+        //if (new ConnexionManager().isConnectedToCopter(this)) showConnected();
     }
 
     private void toast( String message){
@@ -173,6 +202,10 @@ public class Pilot extends Activity {
                 case R.id.btnCalib:
                     startCalibration();
                     break;
+                case R.id.btnDrawer:
+                    DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+                    mDrawerLayout.openDrawer( Gravity.START);
+                    break;
             }
         }
     };
@@ -210,7 +243,7 @@ public class Pilot extends Activity {
     }
 
     public void startConnexion() {
-        /*final Context c = this;
+        final Context c = this;
         final ProgressDialog progress = ProgressDialog.show( this, getString( R.string.loadT_connecting), getString( R.string.load_connecting), true, false);
         new AsyncTask<Void, Void, Boolean>() {
             @Override
@@ -224,7 +257,7 @@ public class Pilot extends Activity {
                 if ( connected ) showConnected();
                 else showDisconnected();
             }
-        }.execute(null, null, null);*/
+        }.execute(null, null, null);
     }
 
     BroadcastReceiver onBroadcastReceived = new BroadcastReceiver() {
@@ -238,7 +271,7 @@ public class Pilot extends Activity {
     };
 
     public void showConnected(){
-        setButtonColor( R.id.btnConnect, Color.YELLOW);
+        setButtonColor(R.id.btnConnect, Color.YELLOW);
         Toast.makeText(this, getString(R.string.connected), Toast.LENGTH_LONG).show();
     }
 
@@ -254,6 +287,12 @@ public class Pilot extends Activity {
 
     public void takePhoto(){ // TODO
         Toast.makeText(this, getString(R.string.take_photo), Toast.LENGTH_LONG).show();
+    }
+
+    public void stopOrRestartNonoCopter( Boolean stop){ // TODO
+        String txt;
+        txt = stop ? "STOP" : "RESTART";
+        Toast.makeText(this, txt, Toast.LENGTH_LONG).show();
     }
 
     public void startCalibration(){

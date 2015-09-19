@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="nav_drawer_items">
+        <item>@string/drawer_calib</item>
+        <item>@string/drawer_restart</item>
+        <item>@string/drawer_stop</item>
+    </string-array>
+
+</resources>

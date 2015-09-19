@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="red"        type="color">#F44336</item>
+    <item name="pink"       type="color">#E91E63</item>
+    <item name="purple"     type="color">#9C27B0</item>
+    <item name="deeppurple" type="color">#673AB7</item>
+    <item name="indigo"     type="color">#3F51B5</item>
+    <item name="blue"       type="color">#2196F3</item>
+    <item name="lightblue"  type="color">#03A9F4</item>
+    <item name="cyan"       type="color">#00BCD4</item>
+    <item name="teal"       type="color">#009688</item>
+    <item name="green"      type="color">#4CAF50</item>
+    <item name="lightgreen" type="color">#8BC34A</item>
+    <item name="lime"       type="color">#CDDC39</item>
+    <item name="yellow"     type="color">#FFEB3B</item>
+    <item name="amber"      type="color">#FFC107</item>
+    <item name="orange"     type="color">#FF9800</item>
+    <item name="deeporange" type="color">#FF5722</item>
+    <item name="brown"      type="color">#795548</item>
+    <item name="grey"       type="color">#9E9E9E</item>
+    <item name="bluegrey"   type="color">#607D8B</item>
+    <item name="black"      type="color">#000000</item>
+    <item name="white"      type="color">#FFFFFF</item>
+
+    <item name="lightgrey"  type="color">#BDBDBD</item>
+
+    <integer-array name="androidcolors">
+        <item>@color/red</item>
+        <item>@color/pink</item>
+        <item>@color/purple</item>
+        <item>@color/deeppurple</item>
+        <item>@color/indigo</item>
+        <item>@color/blue</item>
+        <item>@color/lightblue</item>
+        <item>@color/cyan</item>
+        <item>@color/teal</item>
+        <item>@color/green</item>
+        <item>@color/lightgreen</item>
+        <item>@color/lime</item>
+        <item>@color/yellow</item>
+        <item>@color/amber</item>
+        <item>@color/orange</item>
+        <item>@color/deeporange</item>
+        <item>@color/brown</item>
+        <item>@color/grey</item>
+        <item>@color/bluegrey</item>
+        <item>@color/black</item>
+        <item>@color/white</item>
+        <item>@color/lightgrey</item>
+    </integer-array>
+
+</resources>
